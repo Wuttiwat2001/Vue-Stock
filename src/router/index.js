@@ -1,22 +1,55 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Login from '@/views/Login.vue'
+import Register from '@/views/Register'
+import Report from '@/views/Report'
+import Stock from '@/views/Stock'
+import StockCreate from '@/views/StockCreate'
+import StockEdit from '@/views/StockEdit'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/login',
+    name: 'login',
+    component: Login
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/register',
+    name: 'register',
+    component: Register
+  },
+  {
+    path: '/report',
+    name: 'report',
+    component: Report
+  },
+  {
+    path: '/stock',
+    meta: { isSecured: true},
+    name: 'stock',
+    component: Stock
+  },
+  {
+    path: '/stock-create',
+    meta: { isSecured: true},
+    name: 'stock-create',
+    component: StockCreate
+  },
+  {
+    path: '/stock-edit/:id',
+    meta: { isSecured: true},
+    name: 'stock-edit',
+    component: StockEdit
+  },
+  {
+    path: '/',
+    redirect: '/login'
+  },
+  {
+    path: '*',
+    redirect: '/login' // page not found
   }
 ]
 
