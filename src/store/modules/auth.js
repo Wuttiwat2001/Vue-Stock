@@ -21,7 +21,6 @@ export default {
   actions: {
     restoreLogin({ commit }) {
       if (api.isLoggedIn() === true) {
-        console.log(api.isLoggedIn())
         const username = localStorage.getItem(server.USERNAME);
         commit("SET_LOGGED_IN");
         commit("SET_USERNAME", username);
