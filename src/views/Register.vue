@@ -17,7 +17,9 @@
               name="username"
               label="Username"
               id="username"
-              v-model="account.username"
+              required
+              v-model.trim="account.username"
+              :rules="usernameRules"
             />
             <!-- Password -->
             <v-text-field
@@ -25,10 +27,12 @@
               name="password"
               label="Password"
               id="password"
-              v-model="account.password"
+              required
+              v-model.trim="account.password"
               :type="isShowPassword ? 'text' : 'password'"
               :append-icon="isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="isShowPassword = !isShowPassword"
+              :rules="passwordRules"
               counter
             />
             <v-row class="justify-space-between px-3 py-5">
@@ -49,15 +53,19 @@ export default {
       isShowPassword: false,
       account: {
         username: "",
-        password: ""
-      }
+        password: "",
+      },
+      usernameRules: [(value) => !!value || "Username is required."],
+      passwordRules: [
+        (value1) => !!value1 || "Password is required.",
+        (value2) => !! /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value2) || "Minimum eight characters, at least one letter and one number"]
     };
   },
-  methods:{
-    onSubmit(){
-      alert(this.account.name + this.account.password)
-    }
-  }
+  methods: {
+    onSubmit() {
+      alert(this.account.name + this.account.password);
+    },
+  },
 };
 </script>
 <style></style>
