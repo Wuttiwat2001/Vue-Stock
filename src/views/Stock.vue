@@ -21,11 +21,16 @@
 </template>
 <script>
 import StockCard from '@/components/card/StockCard.vue';
+import axios from 'axios'
 
 export default {
   name: 'stock',
   components:{
     StockCard
+  },
+  async mounted(){
+    const result = await axios.get("http://localhost:8081/api/v2/product")
+    console.log(result.data)
   }
 }
 </script>
