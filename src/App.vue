@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import Header from "@/components/core/Header.vue";
-import Content from "@/components/core/Content.vue";
-import Menu from "@/components/core/Menu.vue";
+import Header from '@/components/core/Header.vue';
+import Content from '@/components/core/Content.vue';
+import Menu from '@/components/core/Menu.vue';
 export default {
   name: "App",
   components: {
@@ -23,6 +23,7 @@ export default {
     },
   },
   mounted(){
+    this.isLogin()
     this.$store.dispatch("auth/restoreLogin");
   }
 };
