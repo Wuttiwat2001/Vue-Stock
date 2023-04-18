@@ -10,13 +10,14 @@
           <v-card-title primary-title> REGISTER </v-card-title>
         </v-img>
         <v-card-text>
-          <v-form>
+          <v-form @submit.prevent="onSubmit">
             <!-- Username -->
             <v-text-field
               color="success"
               name="username"
               label="Username"
               id="username"
+              v-model="account.username"
             />
             <!-- Password -->
             <v-text-field
@@ -24,6 +25,7 @@
               name="password"
               label="Password"
               id="password"
+              v-model="account.password"
               :type="isShowPassword ? 'text' : 'password'"
               :append-icon="isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="isShowPassword = !isShowPassword"
@@ -31,7 +33,7 @@
             />
             <v-row class="justify-space-between px-3 py-5">
               <v-btn text @click.prevent="$router.back()">Cancel</v-btn>
-              <v-btn color="success">Confirm</v-btn>
+              <v-btn type="submit" color="success">Confirm</v-btn>
             </v-row>
           </v-form>
         </v-card-text>
@@ -45,8 +47,17 @@ export default {
   data() {
     return {
       isShowPassword: false,
+      account: {
+        username: "",
+        password: ""
+      }
     };
   },
+  methods:{
+    onSubmit(){
+      alert(this.account.name + this.account.password)
+    }
+  }
 };
 </script>
 <style></style>
