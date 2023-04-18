@@ -14,11 +14,13 @@
   </div>
 </template>
 <script>
+import router from '@/router';
 export default {
   name: "Header",
   methods: {
     onClickLogout() {
       this.$store.dispatch("auth/doLogout");
+      router.push("/")
     },
   },
   computed: {

@@ -1,3 +1,6 @@
+import api from "@/service/api";
+import { server } from "@/service/constants";
+
 export default {
   namespaced: true,
   state: () => ({
@@ -16,18 +19,25 @@ export default {
     },
   },
   actions: {
-    async doLogin({ commit, dispatch }, payload) {
-      const result = true;
-      // const result = await api.login({ username, password });
+    restoreLogin({ commit }) {
+      if (api.isLoggedIn() === true) {
+        console.log(api.isLoggedIn())
+        const username = localStorage.getItem(server.USERNAME);
+        commit("SET_LOGGED_IN");
+        commit("SET_USERNAME", username);
+      }
+    },
+    async doLogin({ commit, dispatch }, { username, password }) {
+      const result = await api.login({ username, password });
       if (result === true) {
         commit("SET_LOGGED_IN");
-        commit("SET_USERNAME", payload.username);
+        commit("SET_USERNAME", username);
       } else {
         dispatch("doLogout", {});
       }
     },
     doLogout({ commit }) {
-      // api.logoff();
+      api.logoff();
       commit("SET_LOGGED_OUT");
       commit("SET_USERNAME", "");
     },

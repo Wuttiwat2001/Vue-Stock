@@ -21,6 +21,9 @@ export default {
     isLogin() {
       return this.$store.getters["auth/isLogin"];
     },
+  },
+  mounted(){
+    this.$store.dispatch("auth/restoreLogin");
   }
 };
 </script>

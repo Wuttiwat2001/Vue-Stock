@@ -4,7 +4,7 @@
       <v-card max-width="400">
         <v-img
           class="white--text align-end"
-          src="@/assets/vue_bg.jpg"
+          src="@/assets/vue_bg_2.jpg"
           height="200"
         >
           <v-card-title primary-title> LOGIN </v-card-title>
@@ -67,6 +67,7 @@ export default {
     },
     onSubmit() {
       this.$store.dispatch("auth/doLogin", this.account);
+      router.push("/stock")
     },
   },
 };
