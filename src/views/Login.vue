@@ -10,13 +10,16 @@
           <v-card-title primary-title> LOGIN </v-card-title>
         </v-img>
         <v-card-text>
-          <v-form>
+          <v-form @submit.prevent="onSubmit">
             <!-- Username -->
             <v-text-field
               color="success"
               name="username"
               label="Username"
               id="username"
+              required
+              v-model.trim="account.username"
+              :rules="usernameRules"
             />
             <!-- Password -->
             <v-text-field
@@ -24,14 +27,17 @@
               name="password"
               label="Password"
               id="password"
+              required
+              v-model.trim="account.password"
               :type="isShowPassword ? 'text' : 'password'"
               :append-icon="isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="isShowPassword = !isShowPassword"
               counter
+              :rules="passwordRules"
             />
             <v-row class="justify-space-between px-3 py-5">
               <v-btn text @click.prevent="onClickRegister">Register</v-btn>
-              <v-btn color="success">Login</v-btn>
+              <v-btn type="submit" color="success">Login</v-btn>
             </v-row>
           </v-form>
         </v-card-text>
@@ -46,11 +52,21 @@ export default {
   data() {
     return {
       isShowPassword: false,
+      account: {
+        username: "",
+        password: "",
+      },
+      usernameRules: [(value) => !!value || "Username is required."],
+      passwordRules: [
+        (value) => !!value || "Password is required.",]
     };
   },
   methods: {
     onClickRegister() {
       router.push("/register");
+    },
+    onSubmit() {
+      this.$store.dispatch("auth/doLogin", this.account);
     },
   },
 };

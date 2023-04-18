@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <Header v-if="false" />
-    <Menu v-if="false" />
+    <Header v-if="isLogin" />
+    <Menu v-if="isLogin" />
     <Content />
   </v-app>
 </template>
@@ -17,8 +17,10 @@ export default {
     Content,
     Menu,
   },
-  data: () => ({
-    //
-  }),
+  computed:{
+    isLogin() {
+      return this.$store.getters["auth/isLogin"];
+    },
+  }
 };
 </script>

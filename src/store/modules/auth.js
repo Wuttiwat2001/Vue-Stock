@@ -11,17 +11,17 @@ export default {
     SET_LOGGED_OUT(state) {
       state.isLogged = false;
     },
-    SET_USERNAME(state, value) {
-      state.username = value;
+    SET_USERNAME(state, payload) {
+      state.username = payload;
     },
   },
   actions: {
-    async doLogin({ commit, dispatch }, { username }) {
+    async doLogin({ commit, dispatch }, payload) {
       const result = true;
       // const result = await api.login({ username, password });
       if (result === true) {
         commit("SET_LOGGED_IN");
-        commit("SET_USERNAME", username);
+        commit("SET_USERNAME", payload.username);
       } else {
         dispatch("doLogout", {});
       }
@@ -34,7 +34,10 @@ export default {
   },
   getters: {
     isLogin(state) {
-      return state.user != null;
+      return state.isLogged;
+    },
+    username(state) {
+      return state.username;
     },
   },
 };
