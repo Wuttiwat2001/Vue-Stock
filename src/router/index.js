@@ -6,6 +6,7 @@ import Report from '@/views/Report'
 import Stock from '@/views/Stock'
 import StockCreate from '@/views/StockCreate'
 import StockEdit from '@/views/StockEdit'
+import AboutVue from '@/views/About.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: AboutVue
   },
   {
     path: '/register',
