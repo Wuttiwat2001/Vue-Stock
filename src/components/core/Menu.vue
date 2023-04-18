@@ -28,7 +28,7 @@
 <script>
 import router from '@/router';
 export default {
-  name: "menu",
+  name: "Menu",
   data() {
     return {
       selectedMenu: 0,
