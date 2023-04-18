@@ -2,7 +2,7 @@
   <v-navigation-drawer app permanent absolute>
     <router-link to="/" exact>
       <div class="bg-div">
-        <v-img src="@/assets/stock_logo.png" width="100%" />
+        <v-img src="@/assets/vue_bg_2.jpg" width="100%" />
       </div>
     </router-link>
 
