@@ -5,7 +5,7 @@
 
       <v-spacer></v-spacer>
 
-      <span>{{ getUsername }}</span>
+      <span>{{ getUsername | capitalize }}</span>
 
       <v-btn icon @click="onClickLogout">
         <v-icon>mdi-export</v-icon>
