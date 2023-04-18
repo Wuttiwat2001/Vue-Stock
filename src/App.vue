@@ -23,7 +23,6 @@ export default {
     },
   },
   mounted(){
-    this.isLogin()
     this.$store.dispatch("auth/restoreLogin");
   }
 };
