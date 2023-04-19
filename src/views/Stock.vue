@@ -137,13 +137,16 @@ export default {
     };
   },
   methods: {
-    async getProduct() {
+    async loadProduct() {
       const result = await axios.get("http://localhost:8081/api/v2/product");
       this.mDataArray = result.data;
     },
+    editItem(item){
+      this.$router.push(`/stock-edit/${item.id}`)
+    }
   },
   mounted() {
-    this.getProduct();
+    this.loadProduct();
   },
 };
 </script>
