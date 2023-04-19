@@ -41,7 +41,25 @@
         <template v-slot:item="{ item }">
           <tr>
             <td>{{ item.id }}</td>
-            <td>{{ item.image }}</td>
+            <td>
+              <v-img
+              v-if="item.image"
+              :src="item.image | imageUrl"
+              aspect-ratio="1"
+              max-width="50"
+              max-height="50"
+            >
+              <template v-slot:placeholder>
+                <v-skeleton-loader
+                  :loading="!item.image"
+                  max-width="50"
+                  max-height="50"
+                  type="image"
+                  class="custom-skeleton"
+                />
+              </template>
+            </v-img>
+            </td>
             <td>{{ item.name }}</td>
             <td>{{ item.price | currency("฿") }}</td>
             <td>{{ item.stock | number("0,0") }} pcs.</td>
@@ -67,6 +85,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       mDataArray: [],
       headers: [
         {
@@ -109,4 +128,8 @@ export default {
   },
 };
 </script>
-<style></style>
+<style scoped>
+.custom-skeleton  {
+  border-radius: 0;
+}
+</style>

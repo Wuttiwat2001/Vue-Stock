@@ -1,3 +1,6 @@
+
+export const imageUrl = "http://localhost:8081/images"
+
 export const server = {
   LOGIN_URL : `login`,
   REGISTER_URL: `register`,
