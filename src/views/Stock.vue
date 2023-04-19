@@ -36,37 +36,56 @@
       </v-col>
     </v-row>
     <!-- Table section -->
+
     <v-card>
-      <v-data-table :headers="headers" :items="mDataArray">
+      <v-data-table :search="search" :headers="headers" :items="mDataArray">
+        <template v-slot:top>
+          <v-app-bar flat color="white">
+            <v-toolbar-title>Stock</v-toolbar-title>
+            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-text-field
+              v-model="search"
+              color="success"
+              append-icon="search"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-btn @click="$router.push('/stock-create')" color="success" dark class="mb-2"
+              ><v-icon left>add</v-icon> <span>New Product</span></v-btn
+            >
+          </v-app-bar>
+        </template>
+
         <template v-slot:item="{ item }">
           <tr>
             <td>{{ item.id }}</td>
             <td>
               <v-img
-              v-if="item.image"
-              :src="item.image | imageUrl"
-              aspect-ratio="1"
-              max-width="50"
-              max-height="50"
-            >
-              <template v-slot:placeholder>
-                <v-skeleton-loader
-                  :loading="!item.image"
-                  max-width="50"
-                  max-height="50"
-                  type="image"
-                  class="custom-skeleton"
-                />
-              </template>
-            </v-img>
+                v-if="item.image"
+                :src="item.image | imageUrl"
+                aspect-ratio="1"
+                max-width="50"
+                max-height="50"
+              >
+                <template v-slot:placeholder>
+                  <v-skeleton-loader
+                    :loading="!item.image"
+                    max-width="50"
+                    max-height="50"
+                    type="image"
+                    class="custom-skeleton"
+                  />
+                </template>
+              </v-img>
             </td>
             <td>{{ item.name }}</td>
             <td>{{ item.price | currency("฿") }}</td>
             <td>{{ item.stock | number("0,0") }} pcs.</td>
             <td>
-              <v-btn color="info" class="mr-2" @click="editItem(item)">
-                <v-icon class="mr-2">edit</v-icon>EDIT</v-btn>
-              <v-btn color="error" @click="deleteItem(item)"><v-icon class="mr-2">delete</v-icon> DELETE</v-btn>
+              <v-icon @click="editItem(item)" left>edit</v-icon>
+              <v-icon @click="deleteItem(item)" left>delete</v-icon>
             </td>
           </tr>
         </template>
@@ -85,7 +104,7 @@ export default {
   },
   data() {
     return {
-      loading: true,
+      search: "",
       mDataArray: [],
       headers: [
         {
@@ -129,7 +148,7 @@ export default {
 };
 </script>
 <style scoped>
-.custom-skeleton  {
+.custom-skeleton {
   border-radius: 0;
 }
 </style>
