@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <!-- Summary section -->
-    <v-row>
+    <v-row class="py-4">
       <v-col lg="3" md="6" sm="12" cols="12">
         <StockCard
           title="TOTAL"
@@ -37,7 +37,22 @@
     </v-row>
     <!-- Table section -->
     <v-card>
-      <v-data-table :headers="headers" :items="mDataArray"> </v-data-table>
+      <v-data-table :headers="headers" :items="mDataArray">
+        <template v-slot:item="{ item }">
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.image }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price | currency("฿") }}</td>
+            <td>{{ item.stock | number("0,0") }} pcs.</td>
+            <td>
+              <v-btn color="info" class="mr-2" @click="editItem(item)">
+                <v-icon class="mr-2">edit</v-icon>EDIT</v-btn>
+              <v-btn color="error" @click="deleteItem(item)"><v-icon class="mr-2">delete</v-icon> DELETE</v-btn>
+            </td>
+          </tr>
+        </template>
+      </v-data-table>
     </v-card>
   </v-container>
 </template>
