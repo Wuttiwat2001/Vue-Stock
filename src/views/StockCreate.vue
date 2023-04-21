@@ -57,6 +57,7 @@
   </v-container>
 </template>
 <script>
+import api from '@/service/api';
 export default {
   name: "stock-create",
   data() {
@@ -90,11 +91,18 @@ export default {
       if (event !== null) {
         reader.readAsDataURL(event);
         //for upload
-        this.product.image = event.name;
+        this.product.image = event;
       }
     },
-    onSubmit() {
-      console.log(this.product);
+    async onSubmit() {
+      const formData = new FormData();
+      const{ name, stock, price} = this.product
+      formData.append("name", name)
+      formData.append("stock", stock)
+      formData.append("price", price)
+      formData.append("image", this.product.image)
+      await api.addProduct(formData)
+      this.$router.back();
     },
     cancel() {
       this.$router.back();
