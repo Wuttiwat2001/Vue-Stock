@@ -95,7 +95,7 @@
 </template>
 <script>
 import StockCard from "@/components/card/StockCard.vue";
-import axios from "axios";
+import api from "@/service/api"
 
 export default {
   name: "stock",
@@ -138,8 +138,8 @@ export default {
   },
   methods: {
     async loadProduct() {
-      const result = await axios.get("http://localhost:8081/api/v2/product");
-      this.mDataArray = result.data;
+      const result = await api.getProducts()
+      this.mDataArray = result.data
     },
     editItem(item){
       this.$router.push(`/stock-edit/${item.id}`)

@@ -46,8 +46,9 @@
   </v-container>
 </template>
 <script>
+import api from '@/service/api';
 export default {
-  name: "Register",
+  name: "register",
   data() {
     return {
       isShowPassword: false,
@@ -62,8 +63,8 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      alert(this.account.name + this.account.password);
+    async onSubmit() {
+      await api.register(this.account)
     },
   },
 };

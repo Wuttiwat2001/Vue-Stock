@@ -48,7 +48,7 @@
 <script>
 import router from "@/router";
 export default {
-  name: "Login",
+  name: "login",
   data() {
     return {
       isShowPassword: false,
