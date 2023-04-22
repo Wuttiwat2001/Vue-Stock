@@ -1,5 +1,5 @@
 <template>
-  <v-card id="stock_card">
+  <v-card ripple id="stock_card">
     <v-list-item two-line>
       <v-list-item-content>
         <v-list-item-title class="headline mb-1">{{title}}</v-list-item-title>
