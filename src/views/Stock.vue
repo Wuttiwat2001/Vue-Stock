@@ -90,6 +90,30 @@
           </tr>
         </template>
       </v-data-table>
+
+      <v-dialog v-model="confirmDeleteDlg" max-width="350">
+        <v-card>
+          <v-card-title primary-title>
+            Confirm Delete
+          </v-card-title>
+
+          <v-card-text class="body">
+            Are you sure to delete this product? You cannot restore it after
+            clicking confirm.
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn text @click="confirmDeleteDlg = false">
+              Cancel
+            </v-btn>
+
+            <v-btn color="error" text @click="confirmDelete">
+              Confirm
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-card>
   </v-container>
 </template>
@@ -134,6 +158,8 @@ export default {
           value: "action",
         },
       ],
+      selectedProductId: "",
+      confirmDeleteDlg: false
     };
   },
   methods: {
@@ -143,6 +169,15 @@ export default {
     },
     editItem(item){
       this.$router.push(`/stock-edit/${item.id}`)
+    },
+    deleteItem(item){
+      this.selectedProductId = item.id
+      this.confirmDeleteDlg = true
+    },
+    async confirmDelete(){
+      await api.deleteProduct(this.selectedProductId)
+      this.confirmDeleteDlg = false
+      this.loadProduct()
     }
   },
   mounted() {
