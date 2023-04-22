@@ -11,7 +11,11 @@
     <v-list shaped>
       <v-subheader>MENUS</v-subheader>
       <v-list-item-group v-model="selectedMenu" mandatory color="primary">
-        <v-list-item v-for="([icon,text,route],index) in menus" :key="index" link @click="onClickMenu(route)"> 
+        <v-list-item
+          v-for="([icon, text, route], index) in menus"
+          :key="index"
+          @click="onClickMenu(route)"
+        >
           <v-list-item-icon>
             <v-icon>{{ icon }}</v-icon>
           </v-list-item-icon>
@@ -26,7 +30,7 @@
   </v-navigation-drawer>
 </template>
 <script>
-import router from '@/router';
+import router from "@/router";
 export default {
   name: "Menu",
   data() {
@@ -39,13 +43,23 @@ export default {
       ],
     };
   },
-  methods:{
-    onClickMenu(link){
-      router.push(link).catch(err => {
-        alert(err)
-      })
-    }
-  }
+  methods: {
+    onClickMenu(link) {
+      router.push(link).catch((err) => {
+        alert(err);
+      });
+    },
+  },
+  watch: {
+    $route(to) {
+      this.selectedMenu = this.menus.findIndex((menu) => menu[2] === to.path);
+    },
+  },
+  mounted() {
+    this.selectedMenu = this.menus.findIndex(
+      (menu) => menu[2] === this.$route.path
+    );
+  },
 };
 </script>
 <style scoped>
