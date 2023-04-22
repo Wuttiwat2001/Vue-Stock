@@ -13,7 +13,7 @@ router.get("/product", async (req, res) => {
 });
 
 const uploadImage = async (files, doc) => {
-  if (files.image !== null) {
+  if (files.image !== undefined) {
     const fileExtention = files.image.originalFilename.split(".")[1];
     doc.image = `${doc.id}.${fileExtention}`;
     const newpath = path.join(__dirname, "upload", "images", doc.image);
@@ -32,19 +32,18 @@ const uploadImage = async (files, doc) => {
   }
 };
 
-
-router.get("/product/id/:id", async (req, res)=>{
-  try{
-      const result = await product.findOne({where:{id: req.params.id}})
-      if (result){
-          res.json(result)
-      }else{
-          res.json({});
-      }
-  }catch(error){
+router.get("/product/id/:id", async (req, res) => {
+  try {
+    const result = await product.findOne({ where: { id: req.params.id } });
+    if (result) {
+      res.json(result);
+    } else {
       res.json({});
+    }
+  } catch (error) {
+    res.json({});
   }
-})
+});
 
 router.post("/product", (req, res) => {
   try {
@@ -70,7 +69,7 @@ router.put("/product", (req, res) => {
       result = await uploadImage(files, fields);
       res.json({
         result: constants.kResultOk,
-        message: JSON.stringify(result)
+        message: JSON.stringify(result),
       });
     });
   } catch (error) {
@@ -86,7 +85,7 @@ router.delete("/product/id/:id", async (req, res) => {
     result = await product.destroy({ where: { id: id } });
     res.json({
       result: constants.kResultOk,
-      message: JSON.stringify(result)
+      message: JSON.stringify(result),
     });
   } catch (error) {
     res.json({ result: constants.kResultNok, message: JSON.stringify(error) });
