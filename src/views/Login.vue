@@ -47,6 +47,7 @@
 </template>
 <script>
 import router from "@/router";
+import api from "@/service/api";
 export default {
   name: "login",
   data() {
@@ -70,6 +71,12 @@ export default {
       router.push("/stock")
     },
   },
+  mounted() {
+    if(api.isLoggedIn()){
+      router.push("/stock")
+    }
+
+  }
 };
 </script>
 <style></style>
