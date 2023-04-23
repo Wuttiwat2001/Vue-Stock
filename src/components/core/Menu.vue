@@ -1,17 +1,22 @@
 <template>
-  <v-navigation-drawer app permanent absolute>
+  <v-navigation-drawer
+    app
+    permanent
+    absolute
+    dark
+    src="@/assets/background_menu.jpg"
+  >
     <router-link to="/" exact>
-      <div class="bg-div">
-        <v-img src="@/assets/vue_bg.jpg" width="100%" />
-      </div>
+      <v-img src="@/assets/vue_bg.jpg" width="100%" />
     </router-link>
 
     <v-divider></v-divider>
 
     <v-list shaped>
       <v-subheader>MENUS</v-subheader>
-      <v-list-item-group v-model="selectedMenu" mandatory color="primary">
+      <v-list-item-group v-model="selectedMenu" mandatory>
         <v-list-item
+          class="title"
           v-for="([icon, text, route], index) in menus"
           :key="index"
           @click="onClickMenu(route)"
@@ -63,7 +68,13 @@ export default {
 };
 </script>
 <style scoped>
-.bg-div {
-  background-color: #4caf50;
+.title {
+  color: white;
+}
+.title:hover{
+  background-color: green;
+}
+.title:active{
+  background: #05ab71;
 }
 </style>
